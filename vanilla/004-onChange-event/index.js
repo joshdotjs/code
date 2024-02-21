@@ -1,6 +1,5 @@
 const span   = document.querySelector('span');
 const input  = document.querySelector('input');
-console.log('input');
 
 // listen for the 'keyup' event on the input element - when the user releases a key, the event will be triggered - this causes the state of the UI to be in sync with the state of the input element
 input.addEventListener('keyup', (event) => {
