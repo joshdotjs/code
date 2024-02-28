@@ -1,4 +1,4 @@
-export default function Cell ({ state, updateState, type, food, idx }) {
+export default function Cell ({ state, updateState, type, food, idx, children }) {
 
   // ============================================
 
@@ -11,12 +11,14 @@ export default function Cell ({ state, updateState, type, food, idx }) {
 
   return (
     <div style={{
-        border: 'solid black 1px',
-        width: 'fit-content',
-        padding: '0.25rem 0.5rem'
+        // outline: 'solid rgba(0,0,0,0.2) 1px',
+        // borderRadius: '0.25rem',
+        // padding: '0.25rem 0.5rem',
+        textAlign: 'right',
       }}
     >
-      <input type="text" value={state[type][food][idx]} onChange={onChange} />
+      { children }
+      { !children && <input type="text" value={state[type][food][idx]} onChange={onChange} />  }
     </div>
   );
 }
