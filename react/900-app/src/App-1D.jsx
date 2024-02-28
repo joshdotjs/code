@@ -11,30 +11,26 @@ export default function App() {
   // ============================================
 
   const [state, setState] = useState({
-    'nutrient': [[ 0, 0 ]],
-    'serving':  [[ 0, 0 ]],
-    'result':   [[ 0, 0 ]],
+    'nutrient': [ 0, 0 ],
+    'serving':  [ 0, 0 ],
+    'result':   [ 0, 0 ],
   });
 
   // ============================================
 
-  const updateState = (type, row, col, val) => {
+  const updateState = (type, row, val) => {
     setState((prev) => {
-      // console.log('val: ', val);
-
       const new_state = structuredClone(prev);
-      new_state[type][0][row] = Number(val);
-      console.log('new_state', new_state);
+      new_state[type][row] = Number(val);
 
-      const total_servings = new_state.serving[0].reduce((a, b) => a + b, 0);
+      const total_servings = new_state.serving.reduce((a, b) => a + b, 0);
       console.log('total_servings', total_servings);
 
-      const updated_results = new_state.nutrient[0].map((nutrient) => {
+      const updated_results = new_state.nutrient.map((nutrient) => {
         return nutrient * total_servings;
       });
-      // console.log('updated_results', updated_results);
 
-      new_state.result = [updated_results];
+      new_state.result = updated_results;
 
       return new_state;
     });
