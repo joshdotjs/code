@@ -44,12 +44,6 @@ export default function App() {
 
   // ============================================
 
-  // useEffect(() => {
-  //   console.log(state);
-  // }, [state]);
-
-  // ============================================
-
   return (
     <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <main
