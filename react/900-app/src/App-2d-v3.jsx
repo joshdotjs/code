@@ -20,7 +20,7 @@ export default function App() {
 
   const newResult = (new_state) => {
     let new_result = [0, 0];
-    for (let food = 0; food < 2; food++) {
+    for (let food = 0; food < state.nutrient[food].length; food++) {
       const total_servings = new_state.serving[food].reduce((a, b) => a + b, 0);
       for (let idx = 0; idx < state.serving[food].length; idx++) {
         new_result[idx] += new_state.nutrient[food][idx] * total_servings;
