@@ -26,8 +26,8 @@ export default function App() {
       const total_servings = new_state.serving.reduce((a, b) => a + b, 0);
       console.log('total_servings', total_servings);
 
-      const updated_results = new_state.result.map((result, idx) => {
-        return new_state.nutrient[idx] * total_servings;
+      const updated_results = new_state.nutrient.map((nutrient) => {
+        return nutrient * total_servings;
       });
 
       new_state.result = updated_results;
