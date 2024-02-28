@@ -1,9 +1,13 @@
-export default function Cell ({ state, updateState, row }) {
+export default function Cell ({ state, updateState, type, row }) {
+
+  // ============================================
 
   const onChange = (e) => {
     const { value } = e.target;
-    updateState('nutrient', row, value);
+    updateState(type, row, value);
   };
+
+  // ============================================
 
   return (
     <div style={{
@@ -12,7 +16,7 @@ export default function Cell ({ state, updateState, row }) {
         padding: '0.25rem 0.5rem'
       }}
     >
-      <input type="text" value={state.nutrient[row]} onChange={onChange} />
+      <input type="text" value={state[type][row]} onChange={onChange} />
     </div>
-  )
+  );
 }
