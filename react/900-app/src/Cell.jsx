@@ -1,11 +1,10 @@
-export default function Cell ({ state, updateState, type, row, col }) {
+export default function Cell ({ state, updateState, type, food, idx }) {
 
   // ============================================
 
   const onChange = (e) => {
     const { value } = e.target;
-    console.log('value: ', value);
-    updateState(type, row, 0, value);
+    updateState(type, food, idx, value);
   };
 
   // ============================================
@@ -17,7 +16,7 @@ export default function Cell ({ state, updateState, type, row, col }) {
         padding: '0.25rem 0.5rem'
       }}
     >
-      <input type="text" value={state[type][0][row]} onChange={onChange} />
+      <input type="text" value={state[type][food][idx]} onChange={onChange} />
     </div>
   );
 }

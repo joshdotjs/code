@@ -11,40 +11,48 @@ export default function App() {
   // ============================================
 
   const [state, setState] = useState({
-    'nutrient': [[ 0, 0 ]],
-    'serving':  [[ 0, 0 ]],
+    'nutrient': [[ 0, 0 ], [ 0, 0 ]],
+    'serving':  [[ 0, 0 ], [ 0, 0 ]],
     'result':   [[ 0, 0 ]],
   });
 
   // ============================================
 
-  const updateState = (type, row, col, val) => {
+  const newResult = (new_state) => {
+    let new_result = [0, 0];
+    for (let food = 0; food < 2; food++) {
+      const total_servings = new_state.serving[food].reduce((a, b) => a + b, 0);
+      for (let idx = 0; idx < 2; idx++) {
+        new_result[idx] += new_state.nutrient[food][idx] * total_servings;
+      }
+    }
+    return new_result;
+  };
+
+  // ============================================
+
+  const updateState = (type, food, idx, val) => {
     setState((prev) => {
       // console.log('val: ', val);
 
       const new_state = structuredClone(prev);
-      new_state[type][0][row] = Number(val);
-      console.log('new_state', new_state);
+      new_state[type][food][idx] = Number(val);
+      // console.log('new_state', new_state);
 
-      const total_servings = new_state.serving[0].reduce((a, b) => a + b, 0);
-      console.log('total_servings', total_servings);
-
-      const updated_results = new_state.nutrient[0].map((nutrient) => {
-        return nutrient * total_servings;
-      });
-      // console.log('updated_results', updated_results);
-
-      new_state.result = [updated_results];
-
+      // const updated_results = new_state.nutrient[food].map((nutrient) => {
+      //   return nutrient * total_servings;
+      // });
+      const new_result = newResult(new_state);
+      new_state.result = [new_result];
       return new_state;
     });
   };
 
   // ============================================
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state]);
 
   // ============================================
 
@@ -59,32 +67,32 @@ export default function App() {
     }}>
       <div style={{ gridRow: '1 / 2', gridColumn: '1 / 2' }}>
         <span>Nutrients:</span>
-        <Cell {...{ state, updateState }} type='nutrient' row={0} />
-        <Cell {...{ state, updateState }} type='nutrient' row={1} />
+        <Cell {...{ state, updateState }} type='nutrient' food={0} idx={0}/>
+        <Cell {...{ state, updateState }} type='nutrient' food={0} idx={1}/>
       </div>
 
       <div style={{ gridRow: '2 / 3', gridColumn: '1 / 2' }}>
         <span>Servings:</span>
-        <Cell {...{ state, updateState }} type='serving' row={0} />
-        <Cell {...{ state, updateState }} type='serving' row={1} />
+        <Cell {...{ state, updateState }} type='serving' food={0} idx={0} />
+        <Cell {...{ state, updateState }} type='serving' food={0} idx={1} />
       </div>
 
       <div style={{ gridRow: '1 / 2', gridColumn: '2 / 3' }}>
         <span>Nutrients:</span>
-        <Cell {...{ state, updateState }} type='nutrient' row={0} />
-        <Cell {...{ state, updateState }} type='nutrient' row={1} />
+        <Cell {...{ state, updateState }} type='nutrient' food={1} idx={0} />
+        <Cell {...{ state, updateState }} type='nutrient' food={1} idx={1} />
       </div>
 
       <div style={{ gridRow: '2 / 3', gridColumn: '2 / 3' }}>
         <span>Servings:</span>
-        <Cell {...{ state, updateState }} type='serving' row={0} />
-        <Cell {...{ state, updateState }} type='serving' row={1} />
+        <Cell {...{ state, updateState }} type='serving' food={1} idx={0} />
+        <Cell {...{ state, updateState }} type='serving' food={1} idx={1} />
       </div>
 
       <div style={{ gridRow: '2 / 3', gridColumn: '3 / 4' }}>
         <span>Results:</span>
-        <Cell {...{ state, updateState }} type='result' row={0} />
-        <Cell {...{ state, updateState }} type='result' row={1} />
+        <Cell {...{ state, updateState }} type='result' food={0} idx={0} />
+        <Cell {...{ state, updateState }} type='result' food={0} idx={1} />
       </div>
     </main>
   );
