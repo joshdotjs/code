@@ -7,6 +7,8 @@ import {
   collection,
   getDocs,
   addDoc,
+  deleteDoc, 
+  doc, // reference to doc, used to delete or update
 } from 'firebase/firestore';
 
 // ==============================================
@@ -58,9 +60,12 @@ export default function App() {
 
   // ============================================
   
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState('');
   const [input, setInput] = useState('');
   useEffect(() => console.log('Input:', input), [input]);
+
+  const [id, setId] = useState('');
+  useEffect(() => console.log('ID:', id), [id]);
 
   // ============================================
 
@@ -85,9 +90,9 @@ export default function App() {
         <button onClick={handleUpload}>Upload Image</button>
       </div>
 
-      <div>
+      <div style={{ marginBottom: '1rem' }}>
         <label>
-          Josh:
+          Name: 
           <input 
             type="text"
             onChange={(event) => setInput(event.target.value)}
@@ -105,6 +110,30 @@ export default function App() {
           }}
         >
           Upload text to Firebase
+        </button>
+      </div>
+
+      <div style={{ marginBottom: '1rem' }}>
+      <label>
+          id: 
+          <input 
+            type="text"
+            onChange={(event) => setId(event.target.value)}
+            value={id}
+          />
+        </label>
+        <button 
+          onClick={async () => {
+            if (!id) return;
+
+            const doc_ref = doc(db, 'images', id);
+
+            await deleteDoc(doc_ref)
+            setId('');
+
+          }}
+        >
+          Delete document from Firebase
         </button>
       </div>
     </>
