@@ -1,0 +1,1 @@
+gsap.to(".hello-world", {duration: 2, opacity: 1, y: -20, ease: "elastic.out(1, 0.3)"});
