@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Program</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="300" style="border:1px solid #000000;">
+    Your browser does not support the HTML canvas tag.
+</canvas>
+
+<script>
+    // Get the canvas element and its 2D context
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Create a linear gradient
+    // The gradient starts from the top-left (0,0) and ends at the bottom-right (400,300)
+    var gradient = ctx.createLinearGradient(0, 0, 400, 300);
+    gradient.addColorStop(0, "magenta");
+    gradient.addColorStop(0.5 ,"blue");
+    gradient.addColorStop(1, "red");
+
+    // Use the gradient to fill the rectangle
+    ctx.fillStyle = gradient;
+    ctx.fillRect(10, 10, 380, 280); // Draw a rectangle with the gradient fill
+</script>
+
+</body>
+</html>
