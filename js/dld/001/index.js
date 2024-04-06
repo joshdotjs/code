@@ -18,22 +18,25 @@ const edges = {
 // ==============================================
 
 const nodes = {
-  'AND1': {
+  AND1: {
     val: null,
+    op: 'AND',
     edges: {
       in: ['A1', 'A2', 'A3'],
       out: ['C1']
     }
   },
-  'AND1': {
+  AND1: {
     val: null,
+    op: 'AND',
     edges: {
       in: ['B1', 'B2'],
       out: ['C1']
     }
   },
-  'OR1': {
+  OR1: {
     val: null,
+    op: 'OR',
     edges: {
       in: ['C1', 'C2'],
       out: ['D1']
